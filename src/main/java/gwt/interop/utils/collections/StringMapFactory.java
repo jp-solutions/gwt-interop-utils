@@ -1,4 +1,4 @@
-package gwt.interop.utils.shared.collections;
+package gwt.interop.utils.collections;
 
 
 public class StringMapFactory {

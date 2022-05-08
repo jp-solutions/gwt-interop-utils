@@ -1,4 +1,4 @@
-package gwt.interop.utils.shared.plainobjects;
+package gwt.interop.utils.plainobjects;
 
 
 import jsinterop.annotations.JsPackage;

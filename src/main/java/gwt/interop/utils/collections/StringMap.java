@@ -1,4 +1,4 @@
-package gwt.interop.utils.shared.collections;
+package gwt.interop.utils.collections;
 /* The MIT License (MIT)
 
 Copyright (c) 2016 GWT React
@@ -21,7 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-import gwt.interop.utils.shared.JsHelper;
+import elemental2.core.JsArray;
+import gwt.interop.utils.JsHelper;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -45,7 +46,7 @@ public interface StringMap<T> extends JsPropertyMap<T> {
      *
      * @return An Array of string keys
      */
-    @JsOverlay default Array<String> keys() {
+    @JsOverlay default JsArray<String> keys() {
     	return JsHelper.objectProperties(this);
     }
 
@@ -54,7 +55,7 @@ public interface StringMap<T> extends JsPropertyMap<T> {
      *
      * @return An Array&lt;T&gt; of values
      */
-    @JsOverlay default Array<T> values() {
+    @JsOverlay default JsArray<T> values() {
         return JsHelper.objectValues(this);
     }
 
@@ -79,7 +80,7 @@ public interface StringMap<T> extends JsPropertyMap<T> {
      * @param forEachFn The callback to invoke
      */
     @JsOverlay default void forEach(ForEachFn<T> forEachFn) {
-        Array<String> keys = keys();
+        JsArray<String> keys = keys();
 
         for(int i = 0; i < keys.getLength(); i++) {
             String key = keys.getAt(i);

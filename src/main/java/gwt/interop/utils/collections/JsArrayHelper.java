@@ -1,17 +1,8 @@
-package gwt.interop.utils.shared.collections;
+package gwt.interop.utils.collections;
 
-import gwt.interop.utils.shared.collections.Array;
+import elemental2.core.JsArray;
 
 public class JsArrayHelper {
-
-    /**
-     * Create a native javascript array
-     * @param <T> The type the array will hold
-     * @return The array
-     */
-    public static native <T extends Object> Array<T> createArray() /*-{
-		return [];
-	}-*/;
 
     /**
      * Cast an Array interface as a Java array
@@ -19,7 +10,7 @@ public class JsArrayHelper {
      * @param <E> The type the array holds
      * @return The java array
      */
-    public static native <E> E[] castAsArray(Array<?> src) /*-{
+    public static native <E> E[] castAsArray(JsArray<?> src) /*-{
 		return src;
 	}-*/;
 
@@ -31,7 +22,7 @@ public class JsArrayHelper {
      * @param v The value
      * @param <T> The type of value
      */
-    public static native <T> void setArrayValue(Array<T> a, int i, T v) /*-{
+    public static native <T> void setArrayValue(JsArray<T> a, int i, T v) /*-{
 		a[i] = v;
 	}-*/;
 
@@ -42,7 +33,7 @@ public class JsArrayHelper {
      * @param <T> The type of value
      * @return The value
      */
-    public static native <T> T getArrayValue(Array<T> a, int i) /*-{
+    public static native <T> T getArrayValue(JsArray<T> a, int i) /*-{
 		return a[i];
 	}-*/;
 }

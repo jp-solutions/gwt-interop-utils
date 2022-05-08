@@ -1,15 +1,10 @@
-package gwt.interop.utils.client;
+package gwt.interop.utils.plainobjects;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import gwt.interop.utils.client.collections.JsArray;
-import gwt.interop.utils.client.collections.JsStringMap;
-import gwt.interop.utils.client.plainobjects.JsPlainObj;
-import gwt.interop.utils.shared.collections.ArrayFactory;
-import gwt.interop.utils.shared.collections.StringMapFactory;
-import gwt.interop.utils.shared.plainobjects.CommonDataObject;
+import elemental2.core.Global;
 
-import static gwt.interop.utils.client.plainobjects.JsPlainObj.$;
-import static gwt.interop.utils.client.plainobjects.JsPlainObj.$jsPlainObj;
+import static gwt.interop.utils.plainobjects.JsPlainObj.$;
+import static gwt.interop.utils.plainobjects.JsPlainObj.$jsPlainObj;
 
 
 public class PlainObjectTests extends GWTTestCase {
@@ -67,20 +62,14 @@ public class PlainObjectTests extends GWTTestCase {
     }
 
     public void testComplexPlainObjectToJson() {
-        StringMapFactory.setConstructor(JsStringMap::create);
-        ArrayFactory.setConstructor(JsArray::create);
-
         CommonDataObject commonObj = CommonDataObject.create();
-        String json = JSON.stringify(commonObj);
+        String json = Global.JSON.stringify(commonObj);
 
         assertEquals(json, "{\"intVal\":10,\"doubleVal\":20.2,\"doubleObjVal\":20.2,\"booleanVal\":true,\"booleanObjVal\":true,\"stringVal\":\"A String Value\",\"anArray\":[\"ArrayValue1\",\"ArrayValue2\",\"ArrayValue3\"],\"aMap\":{\"v1\":\"A Map Value 1\",\"v2\":\"A Map Value 2\"},\"embeddedObj\":{\"field1\":\"An embbeded object\"}}");
     }
 
     public void testComplexPlainObjectFromJson() {
-        StringMapFactory.setConstructor(JsStringMap::create);
-        ArrayFactory.setConstructor(JsArray::create);
-
-        CommonDataObject commonObj = JSON.parse("{\"intVal\":10,\"doubleVal\":20.2,\"doubleObjVal\":20.2,\"booleanVal\":true,\"booleanObjVal\":true,\"stringVal\":\"A String Value\",\"numberVal\":10,\"anArray\":[\"ArrayValue1\",\"ArrayValue2\",\"ArrayValue3\"],\"aMap\":{\"v1\":\"A Map Value 1\",\"v2\":\"A Map Value 2\"},\"embeddedObj\":{\"field1\":\"An embbeded object\"}}");
+        CommonDataObject commonObj = (CommonDataObject) Global.JSON.parse("{\"intVal\":10,\"doubleVal\":20.2,\"doubleObjVal\":20.2,\"booleanVal\":true,\"booleanObjVal\":true,\"stringVal\":\"A String Value\",\"numberVal\":10,\"anArray\":[\"ArrayValue1\",\"ArrayValue2\",\"ArrayValue3\"],\"aMap\":{\"v1\":\"A Map Value 1\",\"v2\":\"A Map Value 2\"},\"embeddedObj\":{\"field1\":\"An embbeded object\"}}");
         assertEquals(commonObj.intVal, 10);
         assertEquals(commonObj.doubleVal,20.2);
         assertEquals(commonObj.doubleObjVal,20.2);

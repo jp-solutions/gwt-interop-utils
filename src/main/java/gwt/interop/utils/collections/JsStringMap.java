@@ -1,4 +1,4 @@
-package gwt.interop.utils.client.collections;
+package gwt.interop.utils.collections;
 /* The MIT License (MIT)
 
 Copyright (c) 2016 GWT React
@@ -21,7 +21,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-import gwt.interop.utils.shared.collections.StringMap;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;

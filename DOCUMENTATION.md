@@ -89,18 +89,18 @@ before you introduce types e.g.</p>
 Another capability that is very useful is inline initialization e.g.
 
 ```java
-   import static gwt.interop.utils.client.plainobjects.PlainObj.$jsPlainObj;
+   import static gwt.interop.utils.plainobjects.PlainObj.$jsPlainObj;
 
-   JsPlainObj state = $jsPlainObj("editingId", 1, "newTodo", "A new todo");
+   JsPlainObj state=$jsPlainObj("editingId",1,"newTodo","A new todo");
 ```
 
 
 For initializing subclasses of JsPlainObj you can use the <code>$</code> method as follows:
 
 ```java
-   import static gwt.interop.utils.client.plainobjects.PlainObj.$;
+   import static gwt.interop.utils.plainobjects.PlainObj.$;
 
-   SomeSubclassOfJsPlainObj mysubclass = $(new SomeSubclassOfJsPlainObj(), "editingId", 1, "newTodo", "A new todo");
+   SomeSubclassOfJsPlainObj mysubclass=$(new SomeSubclassOfJsPlainObj(),"editingId",1,"newTodo","A new todo");
 ```
 
 <p>Just a word of caution. Constructing plain Javascript objects in the above way isn't the most efficient approach.
@@ -242,7 +242,7 @@ Array, you cannot do equality checks between the two adapters e.g.</p>
 
 ## 4 Simple Map Type
 
-<p>The <code>gwt.interop.utils.shared.collections.StringMap</code> interface provides a simple string keyed map that is implemented 
+<p>The <code>gwt.interop.utils.collections.StringMap</code> interface provides a simple string keyed map that is implemented 
 as a Plain Javascript Object. This has the advantage of being serializable to/from JSON in a natural form e.g.</p>
 
 ```java
@@ -266,26 +266,27 @@ freely be converted to/from idiomatic JSON using the standard JSON parse/stringi
 
 ```java
     import gwt.interop.utils.shared.collections.Array;
-    import gwt.interop.utils.shared.collections.StringMap;
-    
-    @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-    public class CommonDataObject {
-        public int intVal;
-        public double doubleVal;
-        //Double is synonymous with a Javascript Number object so can safely be convered to/from JSON
-        public Double doubleObjVal;
-        public boolean booleanVal;
-        //Boolean is synonymous with a Javascript Boolean object so can safely be convered to/from JSON
-        public Boolean booleanObjVal;
-        public String stringVal;
-        public Array<String> anArray;
-        public StringMap<String> aMap;
-        public CommonDataObject2 embeddedObj;
-    }
-    @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-    public class CommonDataObject2 {
-        public String field1;
-    }
+import gwt.interop.utils.collections.StringMap;
+
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+public class CommonDataObject {
+   public int intVal;
+   public double doubleVal;
+   //Double is synonymous with a Javascript Number object so can safely be convered to/from JSON
+   public Double doubleObjVal;
+   public boolean booleanVal;
+   //Boolean is synonymous with a Javascript Boolean object so can safely be convered to/from JSON
+   public Boolean booleanObjVal;
+   public String stringVal;
+   public Array<String> anArray;
+   public StringMap<String> aMap;
+   public CommonDataObject2 embeddedObj;
+}
+
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+public class CommonDataObject2 {
+   public String field1;
+}
 ```
 
 <p>Note above the use of <code>Double</code> and <code>Boolean</code>. In GWT 2.8 these Java classes are eqivalent
@@ -300,31 +301,30 @@ JSON encoding/decoding functionality.</p>
 Given the <code>CommonDataObject</code> class, if you were to write the following:
 
 ```java
-    import gwt.interop.utils.client.collections.JsArray;
-    import gwt.interop.utils.client.collections.JsStringMap;
+    import gwt.interop.utils.collections.JsArray;
 
-    CommonDataObject o = new CommonDataObject();
-    o.intVal = 10;
-    o.doubleVal = 20.20;
-    o.doubleObjVal = 20.20;
-    o.booleanVal = true;
-    o.booleanObjVal = true;
-    o.stringVal = "A String Value";
-    o.anArray = JsArray.create();
+    CommonDataObject o=new CommonDataObject();
+            o.intVal=10;
+            o.doubleVal=20.20;
+            o.doubleObjVal=20.20;
+            o.booleanVal=true;
+            o.booleanObjVal=true;
+            o.stringVal="A String Value";
+            o.anArray=JsArray.create();
 
-    o.anArray.push("ArrayValue1");
-    o.anArray.push("ArrayValue2");
-    o.anArray.push("ArrayValue3");
+            o.anArray.push("ArrayValue1");
+            o.anArray.push("ArrayValue2");
+            o.anArray.push("ArrayValue3");
 
-    o.aMap = JsStringMap.create();
+            o.aMap=JsStringMap.create();
 
-    o.aMap.put("v1", "A Map Value 1");
-    o.aMap.put("v2", "A Map Value 2");
+            o.aMap.put("v1","A Map Value 1");
+            o.aMap.put("v2","A Map Value 2");
 
-    o.embeddedObj = new CommonDataObject2();
-    o.embeddedObj.field1 = "An embbeded object";    
-    
-    String jsonData = JSON.stringify(o);
+            o.embeddedObj=new CommonDataObject2();
+            o.embeddedObj.field1="An embbeded object";
+
+            String jsonData=JSON.stringify(o);
 ```
 
 jsonData would contain the following JSON:
@@ -374,33 +374,32 @@ the client and server. The Following classes provide full emulation for the Js N
 Using these classes you could construct a <code>CommonDataObject</code> on the server as follows:
 
 ```java
-    import gwt.interop.utils.client.collections.JsArray;
-    import gwt.interop.utils.client.collections.JsStringMap;
-    import gwt.interop.utils.server.collections.JavaArray;
-    import gwt.interop.utils.server.collections.JavaStringMap;
+    import gwt.interop.utils.collections.JsArray;
+import gwt.interop.utils.server.collections.JavaArray;
+import gwt.interop.utils.server.collections.JavaStringMap;
     
-    CommonDataObject o = new CommonDataObject();
-    o.intVal = 10;
-    o.doubleVal = 20.20;
-    o.doubleObjVal = 20.20;
-    o.booleanVal = true;
-    o.booleanObjVal = true;
-    o.stringVal = "A String Value";
-    o.anArray = new JavaArray();
+    CommonDataObject o=new CommonDataObject();
+            o.intVal=10;
+            o.doubleVal=20.20;
+            o.doubleObjVal=20.20;
+            o.booleanVal=true;
+            o.booleanObjVal=true;
+            o.stringVal="A String Value";
+            o.anArray=new JavaArray();
 
-    o.anArray.push("ArrayValue1");
-    o.anArray.push("ArrayValue2");
-    o.anArray.push("ArrayValue3");
+            o.anArray.push("ArrayValue1");
+            o.anArray.push("ArrayValue2");
+            o.anArray.push("ArrayValue3");
 
-    o.aMap = new JavaStringMap();
+            o.aMap=new JavaStringMap();
 
-    o.aMap.put("v1", "A Map Value 1");
-    o.aMap.put("v2", "A Map Value 2");
+            o.aMap.put("v1","A Map Value 1");
+            o.aMap.put("v2","A Map Value 2");
 
-    o.embeddedObj = new CommonDataObject2();
-    o.embeddedObj.field1 = "An embbeded object";    
-    
-    String jsonData = JSON.stringify(o);
+            o.embeddedObj=new CommonDataObject2();
+            o.embeddedObj.field1="An embbeded object";
+
+            String jsonData=JSON.stringify(o);
 ```
 
 Then using a library such as FasterXML/jackson, you could then serialize this to JSON and send it the client. 
@@ -408,27 +407,26 @@ Then using a library such as FasterXML/jackson, you could then serialize this to
 If on the server side you want to manipulate the collections using the traditional Java API's you can use the following methods:
 
 ```java
-    import gwt.interop.utils.client.collections.JsArray;
-    import gwt.interop.utils.client.collections.JsStringMap;
-    import gwt.interop.utils.server.collections.JavaArray;
-    import gwt.interop.utils.server.collections.JavaStringMap;
+    import gwt.interop.utils.collections.JsArray;
+import gwt.interop.utils.server.collections.JavaArray;
+import gwt.interop.utils.server.collections.JavaStringMap;
     
-    CommonDataObject o = new CommonDataObject();
-    o.anArray = new JavaArray();
+    CommonDataObject o=new CommonDataObject();
+            o.anArray=new JavaArray();
 
-    //Access the Array using the Java List API (this is very efficient on the server)
-    List<String> anArrayList = o.anArray.asList();
-    anArrayList.add("ArrayValue1");
-    anArrayList.add("ArrayValue2");
-    anArrayList.add("ArrayValue3");
+            //Access the Array using the Java List API (this is very efficient on the server)
+            List<String> anArrayList=o.anArray.asList();
+        anArrayList.add("ArrayValue1");
+        anArrayList.add("ArrayValue2");
+        anArrayList.add("ArrayValue3");
 
-    //Wrap an existing ArrayList maintained on the server
-    ArrayList<String> existingArrayList = new ArrayList<>();
-    o.anArray = new JavaArray(existingArrayList);
-    
-    //Wrap an existing Map maintained on the server
-    Map<String, String> existingMap = new HashMap<>();
-    o.aMap = new JavaStringMap(existingMap);
+        //Wrap an existing ArrayList maintained on the server
+        ArrayList<String> existingArrayList=new ArrayList<>();
+        o.anArray=new JavaArray(existingArrayList);
+
+        //Wrap an existing Map maintained on the server
+        Map<String, String> existingMap=new HashMap<>();
+        o.aMap=new JavaStringMap(existingMap);
 ```
 
 #### 6.1 Shared Methods
@@ -535,5 +533,5 @@ by JsInterop libraries:</p>
 
 ## 8 Low level Javascript utilities
 
-<p>The <code>gwt.interop.utils.shared.JsHelper</code> class provides a set of low level functions for 
+<p>The <code>gwt.interop.utils.JsHelper</code> class provides a set of low level functions for 
 accessing/manipulating Javascript objects.</p>

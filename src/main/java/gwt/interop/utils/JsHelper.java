@@ -1,4 +1,4 @@
-package gwt.interop.utils.shared;
+package gwt.interop.utils;
 /* The MIT License (MIT)
 
 Copyright (c) 2016 GWT React
@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-import gwt.interop.utils.shared.collections.Array;
+import elemental2.core.JsArray;
 
 /**
  * A set of low level Javascript functions useful for building JsInterop interfaces
@@ -46,7 +46,7 @@ public class JsHelper {
      * @param o The object
      * @return An Array of property names
      */
-    public static native Array<String> objectProperties(Object o) /*-{
+    public static native JsArray<String> objectProperties(Object o) /*-{
         var p = [];
 
         for (var prop in o) {
@@ -65,7 +65,7 @@ public class JsHelper {
      * @param <T> The type of values
      * @return An Array of values
      */
-    public static native <T> Array<T> objectValues(Object o) /*-{
+    public static native <T> JsArray<T> objectValues(Object o) /*-{
         var p = [];
         for (var prop in o) {
             if (o.hasOwnProperty(prop)) {

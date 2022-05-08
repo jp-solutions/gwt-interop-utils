@@ -1,4 +1,4 @@
-package gwt.interop.utils.client.plainobjects;
+package gwt.interop.utils.plainobjects;
 /* The MIT License (MIT)
 
 Copyright (c) 2016 GWT React
@@ -21,8 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-import gwt.interop.utils.client.JSON;
-import gwt.interop.utils.shared.JsHelper;
+import elemental2.core.Global;
+import gwt.interop.utils.JsHelper;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -205,7 +205,7 @@ public class JsPlainObj {
 
     @JsOverlay
     final public String toJSONString() {
-        return JSON.stringify(this);
+        return Global.JSON.stringify(this);
     }
 
     /**

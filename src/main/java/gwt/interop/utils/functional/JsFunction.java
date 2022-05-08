@@ -1,4 +1,4 @@
-package gwt.interop.utils.shared.functional;
+package gwt.interop.utils.functional;
 
 
 /**
