@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 import elemental2.core.JsArray;
-import gwt.interop.utils.JsHelper;
+import elemental2.core.JsObject;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -47,7 +47,7 @@ public interface StringMap<T> extends JsPropertyMap<T> {
      * @return An Array of string keys
      */
     @JsOverlay default JsArray<String> keys() {
-    	return JsHelper.objectProperties(this);
+    	return JsObject.keys(this);
     }
 
     /**
@@ -56,7 +56,7 @@ public interface StringMap<T> extends JsPropertyMap<T> {
      * @return An Array&lt;T&gt; of values
      */
     @JsOverlay default JsArray<T> values() {
-        return JsHelper.objectValues(this);
+        return JsObject.values( this);
     }
 
 
