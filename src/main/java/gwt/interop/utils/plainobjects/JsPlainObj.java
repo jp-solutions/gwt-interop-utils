@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 import elemental2.core.Global;
+import elemental2.core.JsObject;
 import gwt.interop.utils.JsHelper;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -34,7 +35,7 @@ import jsinterop.base.Js;
  * are created as object literals using initializers e.g. var a = {prop: 10}
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public class JsPlainObj {
+public class JsPlainObj extends JsObject {
 
     /**
      * Initialize a plain object with the specified property values. For example,
